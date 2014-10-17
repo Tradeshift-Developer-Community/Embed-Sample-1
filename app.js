@@ -56,11 +56,11 @@ if (app.get('env') === 'development') {
 
 
 
-app.listen = function(port){
+/* app.listen = function(port){
   var server = https.createServer({
   		  key: fs.readFileSync('/Users/liujing/tradeshift/https-key/server.key'),
   		  cert: fs.readFileSync('/Users/liujing/tradeshift/https-key/server.crt')
   }, app).listen(port);
   return server.listen.apply(server, arguments);
-};
+}; */
 module.exports = app;

@@ -5,7 +5,7 @@ config = {
 	/**  change this 'localhost' URL to your public URL for testing 
 		a browser accessing from outside world
 	*/
-	thirdPartyEndpoint: 'https://somethirdpartyservice.heroku.com/service',
+	thirdPartyEndpoint: 'http://tranquil-chamber-5614.herokuapp.com/service',
 	
 	/** Change this line to the exact address that Tradeshift provides to you */
 	//tradeshiftEndpoint: 'https://api.tradeshift.com/tradeshift',
@@ -20,6 +20,6 @@ config = {
 
 var tsEndpoint = url.parse(config.tradeshiftEndpoint);
 config.hostname = tsEndpoint.hostname;
-config.port = tsEndpoint.port;
+config.port = tsEndpoint.port? tsEndpoint.port:80;
 config.path = tsEndpoint.path; 
 module.exports = config;
