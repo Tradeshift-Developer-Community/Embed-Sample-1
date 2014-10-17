@@ -1,0 +1,94 @@
+<!doctype html>
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<title>Tradeshift third-party application demo</title>
+		<link rel="stylesheet" type="text/css" href="stylesheets/style.css">
+	</head>
+	<body>
+	<h1>Hello third-party app</h1>
+	<div class="subtitle">
+		This is the demo of using Tradeshift OAuth 2.0 for Web Server Applications
+	</div>
+	<div class="section">
+		<h2>Handling access token and refresh token</h2>
+		Access token and refresh token are retrieved and cached in session.
+		<br/>
+		<button class="refresh">Refresh access token</button>
+		<button class="revoke">Revoke access token</button><br/>
+		 To clear access token from session and refresh page to re-login:<br/>
+		<button class="new">Clean up session</button>
+		<div class="result token-content"><b>OAuth2 tokens: </b><br/>
+			<pre id="accessToken">{{ oauth2Response }}</pre>
+		</div>
+	</div>
+	
+	<div class="section">
+		<h2>Calling Tradeshift API</h2>
+		<button class="getAccount api-btn">Get Account Info</button>
+		<button class="getConnect api-btn">Get Connections</button>
+		<button class="getInvoice api-btn">Get Invoices</button>
+		
+		<h4 id="api-name"></h4>
+		<div class="result"><b>Result: </b><br/>
+			<pre id="show-content"></pre>
+		</div>
+	</div>
+	
+	<script type="text/javascript" src="/javascripts/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript">
+
+		$('button.refresh').on('click', function(){
+			$.get('/service/refresh-token', function(data){
+				$('#accessToken').html(data);
+			}).fail(function(e){
+				$('#accessToken').html('Failed to retrieve refresh_accessToken content from session: '+ e);
+			});
+		});
+
+		$('button.revoke').on("click", function(){
+			$.get('/service/revoke-token', function(data){
+				$('#accessToken').html("revoke token result: " + data);
+			}).fail(function(e){
+				$('#accessToken').html('Failed to retrieve revoke token content from session: '+ e);
+			});
+		});
+
+		$('button.getAccount').on('click', function(){
+			$.get('/service/account-api', function(data){
+				$('#api-name').html('Called API: {{apiRootPath}}/rest/external/account/info');
+				$('#show-content').html(data);
+			}).fail(function(e){
+				$('#show-content').html('Failed: '+ e);
+			});
+		});
+
+		$('button.getConnect').on('click', function(){
+			$.get('/service/connection-api', function(data){
+				$('#api-name').html('Called API: {{apiRootPath}}/rest/external/network');
+				$('#show-content').html(data);
+			}).fail(function(e){
+				$('#show-content').html('Failed: '+ e);
+			});
+		});
+
+		$('button.getInvoice').on('click', function(){
+			$.get('/service/invoice-api', function(data){
+				$('#api-name').html('Called API: {{apiRootPath}}/rest/external/documents/?type=invoice');
+				$('#show-content').html(data);
+			}).fail(function(e){
+				$('#invoice-info').html('Failed: '+ e);
+			});
+		});
+		
+		$('button.new').on('click', function(){
+			$.post('/re-auth', function(data){
+				document.location.href = "/";
+			}).fail(function(e){
+				$('#accessToken').html('Failed: '+ e);
+			});
+		});
+	</script>
+	</body>
+	
+</html>
