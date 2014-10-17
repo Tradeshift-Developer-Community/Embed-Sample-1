@@ -1,4 +1,4 @@
-var debug = require('debug')('BillysBilling.com');
+var debug = require('debug')('tradeshift-3rd-party.com');
 var app = require('../app');
 
 app.set('port', process.env.PORT || 3000);
