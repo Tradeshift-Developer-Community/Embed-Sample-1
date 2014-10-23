@@ -3,11 +3,11 @@
    "tradeshift_version" : "5.0",
    "vendor_id":"LJ_3rd_party",
    "version":"0.0.1", 
-   "app_id":"demo02",
+   "app_id":"demoheroku",
    "default_locale" : "en-GB",
    "locales" : {
        "en-GB" : {
-           "app_name" : "Third-party app demo 2",
+           "app_name" : "Third-party app demo on Herok",
            "app_desc" : "Third party app demo (OAuth2):)"
        }
    },
@@ -15,7 +15,7 @@
        "externalurl" : "true"
    },
    "app" : {
-       "main" : "https://localhost:3000"
+       "main" : "https://tranquil-chamber-5614.herokuapp.com:3000"
    },
    "capabilities": {
 		"access": [
