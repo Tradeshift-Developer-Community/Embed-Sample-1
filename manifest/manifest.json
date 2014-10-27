@@ -2,7 +2,7 @@
    "manifest_version" : "3.0",
    "tradeshift_version" : "5.0",
    "vendor_id":"a3rdparty",
-   "version":"0.0.1", 
+   "version":"0.0.2", 
    "app_id":"demoheroku",
    "default_locale" : "en-GB",
    "locales" : {
