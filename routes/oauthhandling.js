@@ -1,14 +1,14 @@
 var express = require('express');
-var http = require('http');
+
 var path = require('path');
 var util = require('util');
 var router = express.Router();
 var config = require('../config.js');
-
+var http = config.protocol == 'http:'? require('http') : require('https');
 var manifest = require('../manifest/manifest.json');
 
 router.get('/', function(req, res) {
-	console.log('serve / '+ req.query.code);
+	console.log('/service?code='+ req.query.code);
 	if(req.query.code) {
 		resolveTokens(req.query.code, function(tokens) {
 			console.log('tokens: %j', tokens);
@@ -70,7 +70,7 @@ function resolveTokens(code, callback) {
 		port: config.port,
 		path: config.path + '/auth/token',
 		method: 'POST',
-		auth: config.authId +':',
+		auth: config.authId +':'+ config.authSecret,
 		headers: {
 			"Accept" : "application/json",
 			"Content-Type" : "application/x-www-form-urlencoded"
@@ -80,19 +80,24 @@ function resolveTokens(code, callback) {
 	var clientReq = http.request(reqOptions, function(clientRes) {
 		clientRes.setEncoding('utf8');
 		clientRes.on('data', function(data) {
-			console.log('Got: ' + data);
-
-			var tokens = JSON.parse(data);
-			callback(tokens);
+			try{
+				console.log('Got: ' + data);
+				
+				var tokens = JSON.parse(data);
+				callback(tokens);
+			}catch(e){
+				console.log(e.stack);
+			}
 		});
 	});
 	clientReq.on('error', function(e) {
-		console.log(e);
+		console.log(e.stack);
 		console.log('problem with resolveTokens: ' + e.message);
 	});
 	clientReq.write('grant_type=authorization_code&code=' + code
 		+ '&scope=' + config.authId + '.' + manifest.version);
 	clientReq.end();
+	console.log('resolveTokens() ing... %s:%d%s',config.hostname, config.port, config.path + '/auth/token');
 }
 
 function refreshTokens(refreshToken, callback) {

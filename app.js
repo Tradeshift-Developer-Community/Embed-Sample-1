@@ -46,21 +46,47 @@ app.use(function(req, res, next) {
     next(err);
 });
 
-/// error handlers
-
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
-    app.use(errorHandler());
+    app.use(function(err, req, res, next) {
+        res.status(err.status || 500);
+        res.render('error', {
+            message: err.message,
+            error: err
+        });
+    });
 }
 
+// production error handler
+// no stacktraces leaked to user
+app.use(function(err, req, res, next) {
+    res.status(err.status || 500);
+    res.render('error', {
+        message: err.message,
+        error: {}
+    });
+});
 
 
-/* app.listen = function(port){
+
+/* 
+app.listen = function(port){
   var server = https.createServer({
-  		  key: fs.readFileSync('/Users/liujing/tradeshift/https-key/server.key'),
-  		  cert: fs.readFileSync('/Users/liujing/tradeshift/https-key/server.crt')
-  }, app).listen(port);
+  	key:fs.readFileSync(path.join(__dirname, 'ssl_keystore/server.key')),
+  	cert:fs.readFileSync(path.join(__dirname, 'ssl_keystore/server.crt'))
+  }, app);
+  
+  var httpRedirectApp =  express();
+  var server0 = http.createServer(httpRedirectApp).listen(port + 80);
+  var mainUrl = 'https://'+ config.thirdPartyHost +':'+ port;
+  console.log('You may also access http://%s:%d', config.thirdPartyHost, port + 80);
+  httpRedirectApp.get('*', function(req, res){
+  		  
+  		  console.log('redirect to %s', mainUrl);
+  		  res.redirect(mainUrl);
+  });
   return server.listen.apply(server, arguments);
-}; */
+};
+*/
 module.exports = app;
