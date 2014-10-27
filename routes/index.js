@@ -13,7 +13,9 @@ router.get('/', function(req, res) {
 			accessToken: req.session.oauth2AccessToken,
 			refreshToken: req.session.oauth2RefreshToken,
 			apiRootPath: config.path,
-			oauth2Response: req.session.oauth2Response
+			oauth2Response: req.session.oauth2Response,
+			clientID: config.authId,
+			tsHost: config.hostname
 		});
 	}else{
 		// Get a new access token

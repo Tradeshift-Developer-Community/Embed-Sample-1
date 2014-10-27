@@ -3,6 +3,7 @@ body {
 	font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 	background: #fafafa;
 	height:100%;
+	margin:0;
 }
 
 h1 {
@@ -16,6 +17,18 @@ h2 {
 	line-height: 41px;
 	border-bottom: 1px solid #d5d5d5;
 }
+
+.meta-info{
+	font-size: .8em;
+	background-color: #353535;
+	color: #ffffff;
+	padding: 5px;
+	text-align: right;
+}
+.meta-info label{
+	color: #158be7;
+}
+
 .section{
 	padding: 5px 50px 5px 30px;
 }

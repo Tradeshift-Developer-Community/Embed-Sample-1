@@ -7,7 +7,7 @@
    "default_locale" : "en-GB",
    "locales" : {
        "en-GB" : {
-           "app_name" : "Third-party app demo on Herok 3",
+           "app_name" : "Third-party app demo on Herok",
            "app_desc" : "Third party app demo (OAuth2):)"
        }
    },
