@@ -9,10 +9,10 @@ config = {
 	
 	/** Change this line to the exact address that Tradeshift provides to you */
 	tradeshiftEndpoint: 'https://api.tradeshift.com/tradeshift',
-	//tradeshiftEndpoint: 'https://api-sandbox.tradeshift.com/tradeshift',
+	//tradeshiftEndpoint: 'https://api-cn-sandbox.tradeshift.com/tradeshift',
 	//tradeshiftEndpoint: 'http://localhost:8889/tradeshift-proxy',
 
-	authId: manifest.vendor_id + '.'+ manifest.app_id
+	authId: manifest.vendor_id + '.'+ manifest.app_id,
 	
 	/** replace it with your own client secret password which is setup in App uploador page */
 	authSecret: 'niubi'
