@@ -8,8 +8,8 @@ config = {
 	thirdPartyEndpoint: 'http://tranquil-chamber-5614.herokuapp.com/service',
 	
 	/** Change this line to the exact address that Tradeshift provides to you */
-	tradeshiftEndpoint: 'https://api.tradeshift.com/tradeshift',
-	//tradeshiftEndpoint: 'https://api-cn-sandbox.tradeshift.com/tradeshift',
+	//tradeshiftEndpoint: 'https://api.tradeshift.com/tradeshift',
+	tradeshiftEndpoint: 'https://api-cn-sandbox.tradeshift.com/tradeshift',
 	//tradeshiftEndpoint: 'http://localhost:8889/tradeshift-proxy',
 
 	authId: manifest.vendor_id + '.'+ manifest.app_id,
