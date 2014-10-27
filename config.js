@@ -2,11 +2,6 @@ var url = require('url');
 var manifest = require('./manifest/manifest.json');
 
 config = {
-	/**  change this 'localhost' URL to your public URL for testing 
-		a browser accessing from outside world
-	*/
-	thirdPartyEndpoint: 'https://tranquil-chamber-5614.herokuapp.com/service',
-	
 	/** Change this line to the exact address that Tradeshift provides to you */
 	//tradeshiftEndpoint: 'https://api.tradeshift.com/tradeshift',
 	tradeshiftEndpoint: 'https://api-cn-sandbox.tradeshift.com/tradeshift',
@@ -23,5 +18,8 @@ config.hostname = tsEndpoint.hostname;
 config.port = tsEndpoint.port;
 config.protocol = tsEndpoint.protocol;
 config.path = tsEndpoint.path;
+if(!config.thirdPartyEndpoin){
+	config.thirdPartyEndpoint = manifest.app.redirect_uri;
+}
 config.thirdPartyHost = url.parse(config.thirdPartyEndpoint).hostname;
 module.exports = config;
