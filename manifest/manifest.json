@@ -15,8 +15,8 @@
        "externalurl" : "true"
    },
    "app" : {
-       "main" : "http://tranquil-chamber-5614.herokuapp.com",
-       "redirect_uri": "http://tranquil-chamber-5614.herokuapp.com/service"
+       "main" : "https://tranquil-chamber-5614.herokuapp.com",
+       "redirect_uri": "https://tranquil-chamber-5614.herokuapp.com/service"
    },
    "capabilities": {
 		"access": [
