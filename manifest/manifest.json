@@ -2,13 +2,13 @@
    "manifest_version" : "3.0",
    "tradeshift_version" : "5.0",
    "vendor_id":"a3rdparty",
-   "version":"0.0.2", 
-   "app_id":"demoheroku",
+   "version":"0.0.1", 
+   "app_id":"demoheroku2",
    "default_locale" : "en-GB",
    "locales" : {
        "en-GB" : {
-           "app_name" : "Third-party app demo on Herok",
-           "app_desc" : "Third party app demo (OAuth2):)"
+           "app_name" : "Third-party app demo on Herok 2",
+           "app_desc" : "Third party app demo (OAuth2):) 2"
        }
    },
    "config" : {
