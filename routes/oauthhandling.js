@@ -97,7 +97,7 @@ function resolveTokens(code, callback) {
 	clientReq.write('grant_type=authorization_code&code=' + code
 		+ '&scope=' + config.authId + '.' + manifest.version);
 	clientReq.end();
-	console.log('resolveTokens() ing... %s:%d%s',config.hostname, config.port, config.path + '/auth/token');
+	console.log('resolveTokens() ing... %s%s%s',config.hostname, (config.port ? ':'+ config.port: ''), config.path + '/auth/token');
 }
 
 function refreshTokens(refreshToken, callback) {
