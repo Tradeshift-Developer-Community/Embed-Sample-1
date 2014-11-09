@@ -14,6 +14,7 @@ var users = require('./routes/users');
 var oauthhandling = require('./routes/oauthhandling');
 var https = require('https');
 var http = require('http');
+var markdown = require( "markdown" ).markdown;
 var app = express();
 
 // oauth stuff
@@ -33,6 +34,24 @@ app.use(session({
 	secret: 'don\'t let him know',
 	resave: false
 }));
+
+// Lets' show our useful github README.md
+var readmeRaw;
+app.get('/README.md', function(req, res){
+	if(!readmeRaw){
+		fs.readFile(path.join(__dirname, 'README.md'), {encoding:'utf-8' },
+			function(err, data){
+				if(err){
+					console.log(err);
+					res.send(err);
+					return;
+				}
+				readmeRaw = markdown.toHTML(data);
+				res.send(readmeRaw);
+		});
+	}else
+		res.send(readmeRaw);
+});
 
 app.use('/', routes);
 app.use('/service', oauthhandling);
