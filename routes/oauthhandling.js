@@ -18,7 +18,7 @@ router.get('/', function(req, res) {
 			req.session.oauth2Response = JSON.stringify(tokens, null, '  ');
 			res.redirect('/');
 		}).catch(function(error){
-			res.send(500, error + '\n' + error.stack );
+			res.send(500, error +', remote data: "' + error.data +'"\n' + error.stack);
 			console.log('Error: %s\n%s', error, error.stack);
 		}).done();
 	} else {
@@ -30,11 +30,12 @@ router.get('/', function(req, res) {
 
 router.get('/refresh-token', function(req, res) {
 	console.log('refresh token: %s', req.session.oauth2RefreshToken);
-	refreshTokens(req.session.oauth2RefreshToken).then(function(v){
-		req.session.oauth2AccessToken = v.tokens.access_token;
-		res.send(v.data);
+	refreshTokens(req.session.oauth2RefreshToken).then(function(tokens){
+		req.session.oauth2AccessToken = tokens.access_token;
+		req.session.oauth2Response = JSON.stringify(tokens, null, '  ');
+		res.send(req.session.oauth2Response);
 	}).catch(function(error){
-		res.send(500, error + '\n' + error.stack );
+		res.send(500, error +', remote data: "' + error.data +'"\n' + error.stack);
 		console.log('Error: %s\n%s', error, error.stack);
 	}).done();
 });
@@ -47,7 +48,7 @@ router.get('/revoke-token', function(req, res) {
 		}
 		res.send(data);
 	}).catch(function(error){
-		res.send(500, error + '\n' + error.stack );
+		res.send(500, error +', remote data: "' + error.data +'"\n' + error.stack);
 		console.log('Error: %s\n%s', error, error.stack);
 	}).done();
 });
@@ -102,7 +103,7 @@ function resolveTokens(code) {
 				var tokens = JSON.parse(data);
 				def.resolve(tokens);
 			}catch(ex){
-				console.log(ex.stack);
+				ex.data = data;
 				def.reject(ex);
 			}
 		});
@@ -126,7 +127,7 @@ function refreshTokens(refreshToken) {
 			port: config.port,
 			path: config.path + '/auth/token',
 			method: 'POST',
-			auth: config.authId +':',
+			auth: config.authId +':'+ config.authSecret,
 			headers: {
 				"Accept" : "application/json",
 				"Content-Type" : "application/x-www-form-urlencoded"
@@ -143,8 +144,9 @@ function refreshTokens(refreshToken) {
 					if(err)
 						reject(err);
 					else
-						resolve(tokens, data);
+						resolve(tokens);
 				}catch(ex){
+					ex.data = data;
 					reject(ex);
 				}
 			});
@@ -179,16 +181,20 @@ function revokeToken(accessToken, callback) {
 		clientRes.setEncoding('utf8');
 		clientRes.on('data', function(data) {
 			console.log('Got: ' + data);
+			if(data.toUpperCase() == 'OK'){
+				def.resolve(data);
+				return;
+			}
 			var err;
 			try{
 				var obj = JSON.parse(data);
 				err = handleRemoteError(obj);
 			}catch(e){
+				e.data = data;
+				def.reject(e);
 			}
 			if(err)
 				def.reject(err);
-			else
-				def.resolve(data);
 		});
 	});
 	clientReq.on('error', function(e) {
