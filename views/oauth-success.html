@@ -45,7 +45,7 @@
 			$.get('/service/refresh-token', function(data){
 				$('#accessToken').html(data);
 			}).fail(function(e){
-				$('#accessToken').html('Failed to retrieve refresh_accessToken content from session: '+ e);
+				$('#accessToken').html('Failed to retrieve refresh_accessToken content from session: '+ e.responseText);
 			});
 		});
 
@@ -53,7 +53,7 @@
 			$.get('/service/revoke-token', function(data){
 				$('#accessToken').html("revoke token result: " + data);
 			}).fail(function(e){
-				$('#accessToken').html('Failed to retrieve revoke token content from session: '+ e);
+				$('#accessToken').html('Failed to retrieve revoke token content from session: '+ e.responseText);
 			});
 		});
 
@@ -62,7 +62,7 @@
 				$('#api-name').html('Called API: {{apiRootPath}}/rest/external/account/info');
 				$('#show-content').html(data);
 			}).fail(function(e){
-				$('#show-content').html('Failed: '+ e);
+				$('#show-content').html('Failed: '+ e.responseText);
 			});
 		});
 
@@ -71,7 +71,7 @@
 				$('#api-name').html('Called API: {{apiRootPath}}/rest/external/network');
 				$('#show-content').html(data);
 			}).fail(function(e){
-				$('#show-content').html('Failed: '+ e);
+				$('#show-content').html('Failed: '+ e.responseText);
 			});
 		});
 
@@ -80,7 +80,7 @@
 				$('#api-name').html('Called API: {{apiRootPath}}/rest/external/documents/?type=invoice');
 				$('#show-content').html(data);
 			}).fail(function(e){
-				$('#invoice-info').html('Failed: '+ e);
+				$('#invoice-info').html('Failed: '+ e.responseText);
 			});
 		});
 		
@@ -88,7 +88,7 @@
 			$.post('/re-auth', function(data){
 				document.location.href = "/";
 			}).fail(function(e){
-				$('#accessToken').html('Failed: '+ e);
+				$('#accessToken').html('Failed: '+ e.responseText);
 			});
 		});
 	</script>

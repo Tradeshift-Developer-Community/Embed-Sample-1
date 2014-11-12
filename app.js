@@ -76,6 +76,10 @@ app.use(function(err, req, res, next) {
     });
 });
 
+
+process.on('uncaughtException', function(err) {
+	console.log('[app.js] Uncaught exception: %s\n%s', err, err.stack?err.stack:''); 
+});
 /* 
 app.listen = function(port){
   var server = https.createServer({
