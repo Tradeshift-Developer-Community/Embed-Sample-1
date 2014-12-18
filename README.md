@@ -6,7 +6,7 @@ This demo app is written in Node.js.
 
 For the details of building an app upon Tradeshift platform, please refer to http://developer.tradeshift.com/
 
->  If you have already had a Developer role in Tradeshift platform, to run this demo app:
+If you have already had a Developer role in Tradeshift platform, to run this demo app:
 
    1. Modify `manifest/manifest.json`
        * make sure the `vendor_id` is the same vendor id that you use in Tradeshift developer account
@@ -30,3 +30,5 @@ For the details of building an app upon Tradeshift platform, please refer to htt
    
    5. Start demo app server by execute command `bin/www`
 
+>  The current config setting in master branch is for demostrating an node server hosted on your local environment https://localhost:3000, which is handy setup for your first time test.
+   If you only want a plain HTTP service instead of HTTPS, read file `app.js`, simply comment out relevant code snippet.
