@@ -67,20 +67,27 @@ app.use(function(req, res, next) {
 
 // development error handler
 // will print stacktrace
+if (app.get('env') === 'development') {
+    app.use(function(err, req, res, next) {
+        res.status(err.status || 500);
+        res.render('error', {
+            message: err.message,
+            error: err
+        });
+    });
+}
 
+// production error handler
+// no stacktraces leaked to user
 app.use(function(err, req, res, next) {
     res.status(err.status || 500);
     res.render('error', {
         message: err.message,
-        error: err
+        error: {}
     });
 });
 
-
-process.on('uncaughtException', function(err) {
-	console.log('[app.js] Uncaught exception: %s\n%s', err, err.stack?err.stack:''); 
-});
-/* 
+// for HTTPS enablement, you may remove the block blow if you only need plain HTTP service
 app.listen = function(port){
   var server = https.createServer({
   	key:fs.readFileSync(path.join(__dirname, 'ssl_keystore/server.key')),
@@ -98,5 +105,9 @@ app.listen = function(port){
   });
   return server.listen.apply(server, arguments);
 };
-*/
+
+process.on('uncaughtException', function(err) {
+	console.log('[app.js] Uncaught exception: %s\n%s', err, err.stack?err.stack:''); 
+});
+
 module.exports = app;

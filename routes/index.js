@@ -4,7 +4,7 @@ var config = require('../config.js');
 var util = require('util');
 var path = require('path');
 /* GET home page. */
-debugger;
+
 router.get('/', function(req, res) {
 	// check if there is an existing access token in session
 	if(req.session.oauth2AccessToken){

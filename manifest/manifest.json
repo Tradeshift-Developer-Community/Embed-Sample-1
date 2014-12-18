@@ -1,22 +1,22 @@
 {
    "manifest_version" : "3.0",
    "tradeshift_version" : "5.0",
-   "vendor_id":"TS3rdpartyAppDemo",
-   "version":"0.0.1", 
-   "app_id":"demoheroku",
+   "vendor_id":"a3rdParty",
+   "version":"0.1.0", 
+   "app_id":"demo01",
    "default_locale" : "en-GB",
    "locales" : {
        "en-GB" : {
-           "app_name" : "Third-party app demo on Herok",
-           "app_desc" : "Third party app demo (OAuth2) :)"
+           "app_name" : "Third-party app demo",
+           "app_desc" : "Third party app demo (OAuth2):)"
        }
    },
    "config" : {
        "externalurl" : "true"
    },
    "app" : {
-       "main" : "https://ts-3rdparty-sandbox.herokuapp.com",
-       "redirect_uri": "https://ts-3rdparty-sandbox.herokuapp.com/service"
+       "main" : "https://localhost:3000",
+       "redirect_uri":"https://localhost:3000/service"
    },
    "capabilities": {
 		"access": [
