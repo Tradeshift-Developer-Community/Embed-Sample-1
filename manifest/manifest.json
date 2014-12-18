@@ -1,9 +1,9 @@
 {
    "manifest_version" : "3.0",
    "tradeshift_version" : "5.0",
-   "vendor_id":"a3rdParty",
+   "vendor_id":"TS3rdpartyAppDemo",
    "version":"0.1.0", 
-   "app_id":"demo01",
+   "app_id":"localtest01",
    "default_locale" : "en-GB",
    "locales" : {
        "en-GB" : {
