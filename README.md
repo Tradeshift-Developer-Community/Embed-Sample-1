@@ -1,8 +1,8 @@
 Tradeshift Third-party App Demo
 ==================
 
-This is a demo app for demostrating how third-party app developer can use Tradeshift OAuth2 and API plateform to build a simplest web server application.
-This demo app is written in Node.js.
+This is a demo application to demonstrate Tradeshift's API platform and Ouath 2, for a simple embeddable application that calls common API methods.
+This demo is written in Node.js.
 
 For the details of building an app upon Tradeshift platform, please refer to http://developer.tradeshift.com/
 
@@ -19,7 +19,7 @@ If you have already had a Developer role in Tradeshift platform, to run this dem
          + Avaiblable access permissions are `openidconnect`, `group_view`, `group_edit`, `document_view`, `document_create`, `document_send`, `document_delete`, `document_tag`, `network_view`, `network_create`, `network_delete`, `validation_view`, `validation_create`, `validation_delete`, `campaign_view`, `campaign_edit`, `user_add`, `job_view`, `job_edit`, `xsite_signup`, `UpdateCompanyProfile`, `UpdateUserProfile`, `AccessConversation`, `AddComment`, `UpdateConversationState`, `UpdateAttachment`, `UpdateRootDocument`, `Impersonate`, `Share`.
          + `openidconnect` should always be present
        
-   2. Upload `manifest/manifest.json` through Tradeshift Third-party app uploader page, please refer to http://developer.tradeshift.com/ for details
+   2. Reach out to apps@tradeshift.com with a copy of your manifest, and the Tradeshift team will setup your application to test in your account.
    
    3. Modify `config.js` file, change `tradeshiftEndpoint` to exact information that Tradeshift provides to you (Tradeshift test sandbox or production endpoint address),
    	`thirdPartyEndpoint` should be the address where you deploy this demo app, make sure this is a public internet address for accessing from outside if you want to test connection from some place other than your localhost.
